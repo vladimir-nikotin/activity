@@ -15,7 +15,7 @@ class CreateReqLogsTable extends Migration
     {
         Schema::create('req_logs', function (Blueprint $table) {
             $table->string('url');
-            $table->timestampsTz();
+            $table->dateTimeTz('when');
         });
     }
 

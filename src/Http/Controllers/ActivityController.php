@@ -41,6 +41,7 @@ class ActivityController extends Controller
     {
         $validator = Validator::make($params, [
             'url' => 'required|string|max:255',
+            'date' => 'required|date_format:Y-m-d H:i:s',
         ]);
 
         if ($validator->fails()) {
@@ -49,6 +50,7 @@ class ActivityController extends Controller
 
         DB::table('req_logs')->insert([
             'url' => $params['url'],
+            'when' => $params['date'],
         ]);
     }
 
@@ -64,7 +66,7 @@ class ActivityController extends Controller
         }
 
         $result = DB::table('req_logs')
-            ->select('url', DB::raw('MAX(created_at) as last_visited'), DB::raw('COUNT(*) as visit_count'))
+            ->select('url', DB::raw('MAX(when) as last_visited'), DB::raw('COUNT(*) as visit_count'))
             ->groupBy('url')
             ->orderBy('url')
             ->paginate($params['perPage'], ['*'], 'page', $params['page']);
