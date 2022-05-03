@@ -4,6 +4,7 @@ namespace Vladi\Activity\Http\Controllers;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Vladi\Activity\Facades\JsonRpcResponse;
 
 class ActivityController extends Controller
 {
@@ -43,7 +44,7 @@ class ActivityController extends Controller
         ]);
 
         if ($validator->fails()) {
-            throw new Exception('Invalid parameters', -32602);
+            throw new Exception('Invalid params', -32602);
         }
 
         DB::table('req_logs')->insert([
@@ -59,7 +60,7 @@ class ActivityController extends Controller
         ]);
 
         if ($validator->fails()) {
-            throw new Exception('Invalid parameters', -32602);
+            throw new Exception('Invalid params', -32602);
         }
 
         $result = DB::table('req_logs')

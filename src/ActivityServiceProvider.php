@@ -12,17 +12,16 @@ class ActivityServiceProvider extends ServiceProvider
         $this->app->bind('jsonrpcResponse', function($app) {
             return new JsonRpcResponse();
         });
-
-        Route::group([
-            'prefix' => 'api',
-            'middleware' => 'api',
-        ], function () {
-            $this->loadRoutesFrom(__DIR__.'/../routes/api.php');
-        });
     }
 
     public function boot()
     {
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+
+        Route::group([
+            'prefix' => 'api',
+        ], function () {
+            $this->loadRoutesFrom(__DIR__.'/../routes/api.php');
+        });
     }
 }

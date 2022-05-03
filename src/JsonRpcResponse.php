@@ -21,7 +21,7 @@ class JsonRpcResponse
             'jsonrpc' => self::JSON_RPC_VERSION,
             'error' => [
                 'message' => $error,
-                'code' => empty($number) ? -32603 : $number,
+                'code' => empty($number) ? -32000 : $number,
             ],
             'id' => $id,
         ];
